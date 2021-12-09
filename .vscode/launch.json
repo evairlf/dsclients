@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DsclientsApplication<dsclients>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.feldmann.dsclients.DsclientsApplication",
+            "projectName": "dsclients",
+            "args": ""
+        }
+    ]
+}
