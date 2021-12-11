@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import com.feldmann.dsclients.dto.ClientDTO;
+import com.feldmann.dsclients.dto.ClientSaveDTO;
 import com.feldmann.dsclients.entities.Client;
 import com.feldmann.dsclients.repositories.ClientRepository;
 import com.feldmann.dsclients.services.exceptions.DatabaseException;
@@ -40,11 +41,10 @@ public class ClientService {
     }
 
     @Transactional
-    public ClientDTO insert(ClientDTO dto) {
-        Client entity = new Client();
-        copyDtoToEntity(dto, entity);
+    public ClientSaveDTO insert(ClientSaveDTO dto) {
+        Client entity = copySaveDtoToEntity(dto);
         entity = repository.save(entity);
-        return new ClientDTO(entity);
+        return new ClientSaveDTO(entity);
     }
 
     public ClientDTO update(Long id, ClientDTO dto) {
@@ -75,4 +75,25 @@ public class ClientService {
         entity.setCpf(dto.getCpf());
         entity.setIncome(dto.getIncome());
     }
+
+    private Client copySaveDtoToEntity(ClientSaveDTO dto){
+        Client entity = new Client();
+        entity.setName(dto.getName());
+        entity.setBirthDate(dto.getBirthDate());
+        entity.setChildren(dto.getChildren());
+        entity.setCpf(dto.getCpf());
+        entity.setIncome(dto.getIncome());
+        return entity;
+    }
+
+    public ClientDTO responseSaveDto(ClientSaveDTO dto){
+        ClientDTO entity = new ClientDTO();
+        entity.setName(dto.getName());
+        entity.setCpf(dto.getCpf());
+        entity.setBirthDate(dto.getBirthDate());
+        entity.setChildren(dto.getChildren());
+        entity.setIncome(dto.getIncome());
+        return entity;
+    }
+
 }

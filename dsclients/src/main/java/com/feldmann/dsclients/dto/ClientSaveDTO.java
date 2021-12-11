@@ -9,20 +9,21 @@ import java.util.Locale;
 
 import com.feldmann.dsclients.entities.Client;
 
-public class ClientDTO implements Serializable {
+public class ClientSaveDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private Long id;
     private String name;
     private String cpf;
     private String income;
     private Instant birthDate;
     private Integer children;
 
-    public ClientDTO() {
+    public ClientSaveDTO() {
     }
 
-    public ClientDTO(Long id, String name, String cpf, String income, Instant birthDate, Integer children) {
-
+    public ClientSaveDTO(Long id, String name, String cpf, String income, Instant birthDate, Integer children) {
+        this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.income = income;
@@ -30,7 +31,7 @@ public class ClientDTO implements Serializable {
         this.children = children;
     }
 
-    public ClientDTO(String name, String cpf, String income, Instant birthDate, Integer children) {
+    public ClientSaveDTO(String name, String cpf, String income, Instant birthDate, Integer children) {
         this.name = name;
         this.cpf = cpf;
         this.income = income;
@@ -38,7 +39,8 @@ public class ClientDTO implements Serializable {
         this.children = children;
     }
 
-    public ClientDTO(Client entity) {
+    public ClientSaveDTO(Client entity) {
+        this.id = entity.getId();
         this.name = entity.getName();
         this.cpf = entity.getCpf();
         this.income = entity.getIncome();
@@ -84,6 +86,14 @@ public class ClientDTO implements Serializable {
 
     public void setChildren(Integer children) {
         this.children = children;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
