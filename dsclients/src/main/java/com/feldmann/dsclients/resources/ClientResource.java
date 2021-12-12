@@ -1,11 +1,8 @@
 package com.feldmann.dsclients.resources;
 
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.feldmann.dsclients.dto.ClientDTO;
-import com.feldmann.dsclients.dto.ClientSaveDTO;
 import com.feldmann.dsclients.services.ClientService;
 
 import org.springframework.data.domain.Page;
@@ -54,14 +51,12 @@ public class ClientResource {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> insert(@RequestBody ClientSaveDTO dto) {
+    public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO dto) {
         dto = service.insert(dto);
-        ClientDTO dtoSave = service.responseSaveDto(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .build().expand(dto.getId()).toUri();
-
-               
-        return ResponseEntity.created(uri).body(dtoSave);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
+        buildAndExpand(dto.getId()).toUri();
+      
+        return ResponseEntity.created(uri).body(dto);
     }
 
     @PutMapping(value = "/{id}")

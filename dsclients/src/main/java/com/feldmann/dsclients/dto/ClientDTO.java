@@ -2,16 +2,15 @@ package com.feldmann.dsclients.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.feldmann.dsclients.entities.Client;
 
 public class ClientDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
+    private Long id;
     private String name;
     private String cpf;
     private String income;
@@ -22,7 +21,7 @@ public class ClientDTO implements Serializable {
     }
 
     public ClientDTO(Long id, String name, String cpf, String income, Instant birthDate, Integer children) {
-
+       
         this.name = name;
         this.cpf = cpf;
         this.income = income;
@@ -31,6 +30,7 @@ public class ClientDTO implements Serializable {
     }
 
     public ClientDTO(String name, String cpf, String income, Instant birthDate, Integer children) {
+
         this.name = name;
         this.cpf = cpf;
         this.income = income;
@@ -39,6 +39,7 @@ public class ClientDTO implements Serializable {
     }
 
     public ClientDTO(Client entity) {
+        this.id = entity.getId();
         this.name = entity.getName();
         this.cpf = entity.getCpf();
         this.income = entity.getIncome();
@@ -86,4 +87,13 @@ public class ClientDTO implements Serializable {
         this.children = children;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
 }
